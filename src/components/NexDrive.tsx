@@ -587,7 +587,7 @@ export const Contact = () => {
                   </div>
                   <div>
                     <p className="text-blue-200 text-xs font-bold uppercase tracking-widest mb-1">Email</p>
-                    <p className="text-lg">info@nexdrive.com</p>
+                    <p className="text-lg">info@nexdrive.co.za</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
