@@ -1,20 +1,56 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# NexDrive - Premium Bakkie Hire Platform
 
-# Run and deploy your AI Studio app
+NexDrive is a modern, reliable bakkie rental platform designed to provide seamless vehicle hiring services. Built with a focus on performance, user experience, and a professional aesthetic.
 
-This contains everything you need to run your app locally.
+## 🚀 Features
 
-View your app in AI Studio: https://ai.studio/apps/dbdb0fe6-211e-463d-bb83-3689ec93f504
+- **Modern UI/UX**: Sleek, responsive design built with React and Tailwind CSS.
+- **Dynamic Fleet Display**: High-quality visuals showcasing a diverse range of bakkies.
+- **Interactive Elements**: Smooth animations using Framer Motion for a premium feel.
+- **Professional Branding**: Tailored for the vehicle rental industry with a focus on reliability.
 
-## Run Locally
+## 🛠️ Tech Stack
 
-**Prerequisites:**  Node.js
+- **Frontend**: [React 19](https://react.dev/)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Animations**: [Motion](https://motion.dev/)
 
+## 💻 Getting Started
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/TakudzwaMike/nexdrive-bakkie-hire.git
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Configure Environment Variables:
+   Create a `.env` file in the root directory and add any necessary configurations (e.g., API keys).
+
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+### Production Build
+
+To create a production-ready build:
+```bash
+npm run build
+```
+
+## 📄 License
+
+Proprietary and confidential. Internal use only.
