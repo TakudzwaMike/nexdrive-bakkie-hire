@@ -530,6 +530,70 @@ export const About = () => {
   );
 };
 
+const AccountTypeSection = () => {
+  const [accountType, setAccountType] = useState<"personal" | "business">("personal");
+  return (
+    <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 space-y-4">
+      <h4 className="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
+        <span className="w-6 h-6 bg-primary text-white rounded-full text-xs flex items-center justify-center font-bold">2</span>
+        Account Holder
+      </h4>
+      <div className="flex gap-4">
+        <button
+          type="button"
+          onClick={() => setAccountType("personal")}
+          className={`flex-1 py-3 rounded-xl text-sm font-bold border-2 transition-all ${accountType === "personal" ? "bg-primary text-white border-primary shadow-lg shadow-primary/20" : "bg-white text-slate-500 border-slate-200 hover:border-primary/40"}`}
+        >
+          👤 Personal
+        </button>
+        <button
+          type="button"
+          onClick={() => setAccountType("business")}
+          className={`flex-1 py-3 rounded-xl text-sm font-bold border-2 transition-all ${accountType === "business" ? "bg-primary text-white border-primary shadow-lg shadow-primary/20" : "bg-white text-slate-500 border-slate-200 hover:border-primary/40"}`}
+        >
+          🏢 Business
+        </button>
+      </div>
+
+      {accountType === "business" && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="space-y-4 pt-2"
+        >
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Company Name</label>
+              <input type="text" className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm" placeholder="e.g. Acme (Pty) Ltd" />
+            </div>
+            <div className="space-y-2">
+              <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Company Registration No.</label>
+              <input type="text" className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm" placeholder="e.g. 2020/123456/07" />
+            </div>
+          </div>
+          {/* 5. CK Documents for Business */}
+          <div className="space-y-2">
+            <label className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+              <span className="w-5 h-5 bg-primary/10 text-primary rounded-full text-[10px] flex items-center justify-center font-bold">5</span>
+              CK / CIPC Company Documents
+            </label>
+            <label className="flex items-center gap-3 w-full px-4 py-3 bg-white border border-dashed border-slate-300 rounded-xl cursor-pointer hover:border-primary hover:bg-accent/20 transition-all">
+              <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+              <span className="text-xs text-slate-500">Upload CK1/CK2/CoR15 or CIPC certificate (PDF)</span>
+              <input type="file" accept=".pdf,.jpg,.jpeg,.png" className="hidden" />
+            </label>
+            <p className="text-[10px] text-slate-400 italic pl-1">Required for all business account applications. Accepted: CK1, CK2, CoR15.1A or CIPC Company registration certificate.</p>
+          </div>
+        </motion.div>
+      )}
+
+      {accountType === "personal" && (
+        <p className="text-xs text-slate-400 italic">Personal accounts require a valid ID and driver's license (see section 3 below).</p>
+      )}
+    </div>
+  );
+};
+
 export const Contact = () => {
   return (
     <section id="contact" className="section-padding bg-slate-50">
@@ -540,6 +604,7 @@ export const Contact = () => {
             <p className="text-slate-600 mb-10">Fill out the form below and our team will get back to you with a tailored rental plan within the hour.</p>
             
             <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+              {/* Personal Info */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Full Name</label>
@@ -550,22 +615,114 @@ export const Contact = () => {
                   <input type="email" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-accent/30 transition-all" placeholder="john@example.com" />
                 </div>
               </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Vehicle Type</label>
-                <select className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-accent/30 transition-all">
-                  <option>Single Cab Bakkie</option>
-                  <option>Double Cab 4x4</option>
-                  <option>Super Cab</option>
-                </select>
+
+              {/* 1. Duration of Hire */}
+              <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 space-y-4">
+                <h4 className="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
+                  <span className="w-6 h-6 bg-primary text-white rounded-full text-xs flex items-center justify-center font-bold">1</span>
+                  Duration of Hire
+                </h4>
+                <div className="grid md:grid-cols-3 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Vehicle Type</label>
+                    <select className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm">
+                      <option>Single Cab Bakkie</option>
+                      <option>Double Cab 4x4</option>
+                      <option>Super Cab</option>
+                      <option>Logistics Specialist</option>
+                      <option>Heavy-Duty Workhorse</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Start Date</label>
+                    <input type="date" className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-slate-400">End Date</label>
+                    <input type="date" className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm" />
+                  </div>
+                </div>
               </div>
-              <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Message</label>
-                <textarea rows={4} className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-accent/30 transition-all" placeholder="Tell us about your requirements..."></textarea>
+
+              {/* 2. Account Holder Type */}
+              <AccountTypeSection />
+
+              {/* 3. Driver's Details */}
+              <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 space-y-4">
+                <h4 className="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
+                  <span className="w-6 h-6 bg-primary text-white rounded-full text-xs flex items-center justify-center font-bold">3</span>
+                  Driver's Details
+                </h4>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Driver's License Number</label>
+                    <input type="text" className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm" placeholder="e.g. 12345678" />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-slate-400">ID Number</label>
+                    <input type="text" className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm" placeholder="e.g. 9001015800083" />
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Upload Driver's License</label>
+                    <label className="flex items-center gap-3 w-full px-4 py-3 bg-white border border-dashed border-slate-300 rounded-xl cursor-pointer hover:border-primary hover:bg-accent/20 transition-all">
+                      <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                      <span className="text-xs text-slate-500">Click to upload PDF/Image</span>
+                      <input type="file" accept=".pdf,.jpg,.jpeg,.png" className="hidden" />
+                    </label>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Upload ID Document</label>
+                    <label className="flex items-center gap-3 w-full px-4 py-3 bg-white border border-dashed border-slate-300 rounded-xl cursor-pointer hover:border-primary hover:bg-accent/20 transition-all">
+                      <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                      <span className="text-xs text-slate-500">Click to upload PDF/Image</span>
+                      <input type="file" accept=".pdf,.jpg,.jpeg,.png" className="hidden" />
+                    </label>
+                  </div>
+                </div>
               </div>
-              <button className="w-full py-5 bg-primary text-white rounded-2xl font-bold hover:bg-primary-light transition-all shadow-lg shadow-primary/20">
-                Send Request
+
+              {/* 4. Banking Details */}
+              <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 space-y-4">
+                <h4 className="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
+                  <span className="w-6 h-6 bg-primary text-white rounded-full text-xs flex items-center justify-center font-bold">4</span>
+                  Banking Details
+                </h4>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Bank Name</label>
+                    <select className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm">
+                      <option value="">Select Bank</option>
+                      <option>Absa</option>
+                      <option>FNB</option>
+                      <option>Nedbank</option>
+                      <option>Standard Bank</option>
+                      <option>Capitec</option>
+                      <option>African Bank</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Account Number</label>
+                    <input type="text" className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm" placeholder="e.g. 1234567890" />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Upload Bank Confirmation Letter</label>
+                  <label className="flex items-center gap-3 w-full px-4 py-3 bg-white border border-dashed border-slate-300 rounded-xl cursor-pointer hover:border-primary hover:bg-accent/20 transition-all">
+                    <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                    <span className="text-xs text-slate-500">Upload bank confirmation letter (PDF/Image)</span>
+                    <input type="file" accept=".pdf,.jpg,.jpeg,.png" className="hidden" />
+                  </label>
+                </div>
+              </div>
+
+              <button className="w-full py-5 bg-primary text-white rounded-2xl font-bold hover:bg-primary-light transition-all shadow-lg shadow-primary/20 text-sm uppercase tracking-wider">
+                Submit Booking Request
               </button>
             </form>
+
           </div>
           
           <div className="bg-primary p-12 lg:p-20 text-white flex flex-col justify-between">
